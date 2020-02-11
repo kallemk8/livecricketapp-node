@@ -4,13 +4,12 @@ const {User} = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth');
-router.get('/', auth, async (req,res)=>{
+router.get('/', async (req,res)=>{
     const users = await User
     .find()
     .sort({name:1});
     res.send(users);
 });
-
 router.post('/', async (req, res)=>{
     const result = await User.findOne({username:req.body.username});
     if(result) {
@@ -21,8 +20,7 @@ router.post('/', async (req, res)=>{
     let password = "";
     if(req.body.password){
         password = await bcrypt.hash(req.body.password, salt);
-    }
-    
+    }    
     const user = new User({
         username:req.body.username,
         password:password,
