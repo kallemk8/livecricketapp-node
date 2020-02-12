@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const user = require('./routes/user');
+const player = require('./routes/players');
+const country = require('./routes/countries');
 const auth = require('./routes/auth');
 const upload = require('./routes/upload');
 const config = require('config');
@@ -14,6 +16,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'))
 app.use(cors());
 app.use('/api/user', user);
+app.use('/api/players', player);
+app.use('/api/countries', country);
 app.use('/api/auth', auth);
 app.use('/api/upload', upload);
 app.get('/', function (req, res) {
