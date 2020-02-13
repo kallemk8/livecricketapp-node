@@ -5,10 +5,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth');
 router.get('/', async (req,res)=>{
-    const result = await Player
+    var result = await Player
     .find()
-    .sort({name:1});
+    .populate('country')
     res.send(result);
+    
 });
 router.post('/', async (req, res)=>{
      
@@ -56,6 +57,7 @@ router.put('/:id', auth, async (req, res)=>{
 router.get('/:id',  async (req, res)=>{
     try{
         const result = await Player.findById(req.params.id);
+        await result.populate('country').execPopulate()
         res.send(result);
     }
     catch(ex){

@@ -6,7 +6,7 @@ const Player = new mongoose.model('player', new mongoose.Schema({
     subname:String,
     DOB:Date,
     height:Number,
-    country:mongoose.Schema.Types.ObjectId,
+    country:{type:mongoose.Schema.Types.ObjectId,  ref:'countries'},
     aboutUs:String,
     role:String,
     battingStyle:String,
