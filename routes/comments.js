@@ -15,7 +15,7 @@ router.get('/postcomments/:id', async (req,res)=>{
     var result = await Comments
     .find()
     .populate('author','firstName email')
-    var results = result.filter(comment => comment.postID == req.params.id && comment.parentcommentid == null)
+    var results = result.filter(comment => comment.postID == req.params.id && comment.parentcommentid == null );
     res.send(results);
     
 });
